@@ -2,7 +2,7 @@ const { isEmail } = require('validator');
 const { User } = require('../model');
 
 module.exports = {
-    createUser = async (req, res) => {
+    createUser: async (req, res) => {
         const { username, email, role, powerLevel } = req.body;
 
         if (!isEmail(email)) {
