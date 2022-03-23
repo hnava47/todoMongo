@@ -24,7 +24,7 @@ module.exports = {
     },
     getAllUsers: async (req, res) => {
         try {
-            const users = await User.find();
+            const users = await User.find({}, '-role -powerLevel');
             res.json(users);
         } catch (error) {
             res.json(error);
