@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const todoSchema = new Schema({
     text: {
         type: String,
-        require: true
+        required: true
     },
     completed: {
         type: Boolean,

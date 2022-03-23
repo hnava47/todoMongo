@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const { isEmail } = require('validator');
 
 // The Schema is very similar to the "class" that we were creating in Sequelize
 const userSchema = new Schema({
@@ -8,7 +9,26 @@ const userSchema = new Schema({
         trim: true,
         minLength: 4,
         maxLength: 8,
-        require: true
+        // sets required to true and sets our own custom error message when not passed in
+        // 1st element is whether it's required or not
+        // 2nd element is the custom error message
+        required: [true, 'Username is required and must be a minimum of 4 and maximum of 8']
+    },
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        lowercase: true,
+        validate: {
+            // actual value for email that the user is providing
+            validator: function(value) {
+                return isEmail(value);
+            },
+            // userObject is the whole object that the user is trying to save
+            message: function(userObject) {
+                return `${userObject.email} is not a valid email address`;
+            }
+        }
     },
     role: {
         type: String,
