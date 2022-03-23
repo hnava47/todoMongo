@@ -39,5 +39,23 @@ module.exports = {
         } catch (error) {
             res.json(error);
         }
+    },
+    updateUserById: async (req, res) => {
+        const {  userId } = req.params;
+
+        try {
+            const updatedUser = await User.findByIdAndUpdate(
+                userId,
+                {...req.body},
+                {
+                    new: true,
+                    runValidators: true
+                }
+            );
+
+            res.json(updatedUser);
+        } catch (error) {
+            res.json(error);
+        }
     }
 };
