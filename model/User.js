@@ -12,7 +12,7 @@ const userSchema = new Schema({
         // sets required to true and sets our own custom error message when not passed in
         // 1st element is whether it's required or not
         // 2nd element is the custom error message
-        required: [true, 'Username is required and must be a minimum of 4 and maximum of 8']
+        required: [true, 'Username is required and must be a minimum of 4 and maximum of 8 characters']
     },
     email: {
         type: String,
