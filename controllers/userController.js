@@ -3,7 +3,15 @@ const { User } = require('../model');
 
 module.exports = {
     createUser: async (req, res) => {
-        const { username, email, role, powerLevel } = req.body;
+        const {
+            username,
+            email,
+            role,
+            powerLevel,
+            hobby,
+            firstFavorite,
+            secondFavorite
+        } = req.body;
 
         if (!isEmail(email)) {
             return res.status(401).json({ error: 'Email must be a valid email address' })
@@ -14,7 +22,12 @@ module.exports = {
                 username,
                 email,
                 role,
-                powerLevel
+                powerLevel,
+                hobbies: [hobby],
+                twoFavoriteCrypto: {
+                    firstFavorite,
+                    secondFavorite
+                }
             });
 
             res.json(newUser);
@@ -25,7 +38,7 @@ module.exports = {
     getAllUsers: async (req, res) => {
         try {
             const users = await User.find({}, '-role -powerLevel');
-            
+
             res.json(users);
         } catch (error) {
             res.json(error);
@@ -67,6 +80,27 @@ module.exports = {
             const deletedUser = await User.findByIdAndDelete(userId);
 
             res.json(deletedUser);
+        } catch (error) {
+            res.json(error);
+        }
+    },
+    addHobbyToUserById: async (req, res) => {
+        const { userId } = req.params;
+        const { hobby } = req.body;
+
+        try {
+            const updatedUser = await User.findByIdAndUpdate(userId,
+                {
+                    $push: {
+                        hobbies: hobby
+                    }
+                },
+                {
+                    new: true
+                }
+            );
+
+            res.json(updatedUser);
         } catch (error) {
             res.json(error);
         }

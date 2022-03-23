@@ -4,12 +4,15 @@ const {
     getAllUsers,
     getUserById,
     updateUserById,
-    deleteUserById
+    deleteUserById,
+    addHobbyToUserById
 } = require('../../../controllers/userController');
 
 router.route('/')
     .get(getAllUsers)
     .post(createUser);
+
+router.put('/addHobby/:userId', addHobbyToUserById);
 
 router.route('/:userId')
     .get(getUserById)

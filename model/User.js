@@ -40,6 +40,19 @@ const userSchema = new Schema({
         type: Number,
         min: 1,
         max: 10000
+    },
+    hobbies: [String],
+    twoFavoriteCrypto: {
+        firstFavorite: {
+            type: String,
+            uppercase: true,
+            trim: true
+        },
+        secondFavorite: {
+            type: String,
+            uppercase: true,
+            trim: true
+        }
     }
 });
 
