@@ -29,5 +29,15 @@ module.exports = {
         } catch (error) {
             res.json(error);
         }
+    },
+    getUserById: async (req, res) => {
+        const { userId } = req.params;
+
+        try {
+            const user = await User.findById(userId, '-role -powerLevel');
+            res.json(user);
+        } catch (error) {
+            res.json(error);
+        }
     }
 };
