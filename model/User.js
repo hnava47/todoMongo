@@ -21,9 +21,8 @@ const userSchema = new Schema({
         min: 1,
         max: 10000
     }
-})
+});
 
 const User = model('User', userSchema);
 
 module.exports = User;
-
