@@ -7,8 +7,8 @@ const userSchema = new Schema({
     username: {
         type: String,
         trim: true,
-        minLength: 4,
-        maxLength: 8,
+        // minLength: 4,
+        // maxLength: 8,
         // sets required to true and sets our own custom error message when not passed in
         // 1st element is whether it's required or not
         // 2nd element is the custom error message
