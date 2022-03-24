@@ -1,6 +1,13 @@
 const { Schema, model } = require('mongoose');
 
 const todoSchema = new Schema({
+    // _id
+    userId: {
+        // ObjectId type
+        type: Schema.Types.ObjectId,
+        // Ref means which Collection does this object ID reference
+        ref: 'User'
+    },
     text: {
         type: String,
         required: true
