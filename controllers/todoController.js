@@ -2,7 +2,7 @@ const { Todo } = require('../model');
 
 module.exports = {
     createTodo: async (req, res) => {
-        const { text, completed } = req.body;
+        const { text, userId } = req.body;
 
         if (!text) {
             return res.status(401).json({ error: 'Must included text' });
@@ -11,7 +11,7 @@ module.exports = {
         try {
             const newTodo = await Todo.create({
                 text,
-                completed
+                userId
             });
 
             res.json(newTodo);
@@ -21,7 +21,10 @@ module.exports = {
     },
     getAllTodos: async (req, res) => {
         try {
-            const todos = await Todo.find({});
+            const todos = await Todo.find().populate({
+                path: 'userId',
+                select: '-role -powerLevel -email -hobbies'
+            });
 
             res.json(todos);
         } catch (error) {
