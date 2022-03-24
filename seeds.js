@@ -101,19 +101,19 @@ const seedDb = async () => {
     const blogsToCreate = [
         {
             userId: users[Math.floor(Math.random() * users.length)]._id,
-            description: faker.random.word()
+            description: faker.lorem.paragraph()
         },
         {
             userId: users[Math.floor(Math.random() * users.length)]._id,
-            description: faker.random.word()
+            description: faker.lorem.paragraph()
         },
         {
             userId: users[Math.floor(Math.random() * users.length)]._id,
-            description: faker.random.word()
+            description: faker.lorem.paragraph()
         }
     ]
 
-    const blogs = await Blog.insertMany(blogsToCreate);
+    await Blog.insertMany(blogsToCreate);
 
     const likesToCreate = [
         {
@@ -140,48 +140,55 @@ const seedDb = async () => {
     ];
 
     const [like1, like2] = await Like.insertMany(likesToCreate);
-    const firstBlog = blogs[0];
+    // const firstBlog = blogs[0];
+
+    // -1 descending from highest to lowest
+    // 1 ascending from lowest to highest
+    // Use limit() and skip() for pagination
+    const blogs = await Blog.find({}).sort({ description: -1 }).limit(3).skip(1);
+
+    console.log(blogs);
 
     // How to add like
-    const updatedBlog = await Blog.findByIdAndUpdate(
-        firstBlog._id,
-        {
-            $addToSet: {
-                likeIds: [like1, like2]
-            }
-        },
-        {
-            new: true
-        }
-    ).populate({
-        path: 'likeIds',
-        populate: 'userId'
-    });
+    // const updatedBlog = await Blog.findByIdAndUpdate(
+    //     firstBlog._id,
+    //     {
+    //         $addToSet: {
+    //             likeIds: [like1, like2]
+    //         }
+    //     },
+    //     {
+    //         new: true
+    //     }
+    // ).populate({
+    //     path: 'likeIds',
+    //     populate: 'userId'
+    // });
 
     // firstBlog.likeIds.push(like1);
     // firstBlog.likeIds.push(like2);
 
     // await firstBlog.save();
 
-    console.log('After adding', updatedBlog.likeIds);
+    // console.log('After adding', updatedBlog.likeIds);
 
     // How to remove like
-    const updatedBlogPartTwo = await Blog.findByIdAndUpdate(
-        firstBlog._id,
-        {
-            $pull: {
-                likeIds: like1._id
-            }
-        },
-        {
-            new: true
-        }
-    ).populate({
-        path: 'likeIds',
-        populate: 'userId'
-    });
+    // const updatedBlogPartTwo = await Blog.findByIdAndUpdate(
+    //     firstBlog._id,
+    //     {
+    //         $pull: {
+    //             likeIds: like1._id
+    //         }
+    //     },
+    //     {
+    //         new: true
+    //     }
+    // ).populate({
+    //     path: 'likeIds',
+    //     populate: 'userId'
+    // });
 
-    console.log('After removing', updatedBlogPartTwo.likeIds);
+    // console.log('After removing', updatedBlogPartTwo.likeIds);
 
     // const employees = await User.findByRole('Employee');
 
