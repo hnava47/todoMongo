@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const { faker } = require('@faker-js/faker');
+const { faker, Faker } = require('@faker-js/faker');
 const {
     User,
-    Todo
+    Todo,
+    Blog
 } = require('./model');
 
 const seedDb = async () => {
@@ -94,7 +95,52 @@ const seedDb = async () => {
 
     const todos = await Todo.insertMany(todosToCreate);
 
-    console.log(todos);
+    const blogsToCreate = [
+        {
+            userId: users[Math.floor(Math.random() * users.length)]._id,
+            description: faker.random.word()
+        },
+        {
+            userId: users[Math.floor(Math.random() * users.length)]._id,
+            description: faker.random.word()
+        },
+        {
+            userId: users[Math.floor(Math.random() * users.length)]._id,
+            description: faker.random.word()
+        },
+        {
+            userId: users[Math.floor(Math.random() * users.length)]._id,
+            description: faker.random.word()
+        },
+        {
+            userId: users[Math.floor(Math.random() * users.length)]._id,
+            description: faker.random.word()
+        },
+        {
+            userId: users[Math.floor(Math.random() * users.length)]._id,
+            description: faker.random.word()
+        },
+        {
+            userId: users[Math.floor(Math.random() * users.length)]._id,
+            description: faker.random.word()
+        },
+        {
+            userId: users[Math.floor(Math.random() * users.length)]._id,
+            description: faker.random.word()
+        },
+        {
+            userId: users[Math.floor(Math.random() * users.length)]._id,
+            description: faker.random.word()
+        },
+        {
+            userId: users[Math.floor(Math.random() * users.length)]._id,
+            description: faker.random.word()
+        }
+    ]
+
+    const blogs = await Blog.insertMany(blogsToCreate);
+
+    console.log(blogs);
 
     process.exit(0);
 };
