@@ -56,10 +56,11 @@ const userSchema = new Schema({
             trim: true
         }
     }
-}, {
+},
+{
     toJSON: {
         virtuals: true
-    }
+}
 });
 
 userSchema.virtual('fullName').get(function() {
