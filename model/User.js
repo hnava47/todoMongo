@@ -55,7 +55,13 @@ const userSchema = new Schema({
             uppercase: true,
             trim: true
         }
-    }
+    },
+    todoIds: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Todo'
+        }
+    ]
 },
 {
     toJSON: {
