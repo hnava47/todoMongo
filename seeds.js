@@ -16,31 +16,43 @@ const seedDb = async () => {
 
     const usersToCreate = [
         {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
             username: faker.company.companyName(),
             email: faker.internet.email(),
             role: 'Admin'
         },
         {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
             username: faker.company.companyName(),
             email: faker.internet.email(),
             role: 'Admin'
         },
         {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
             username: faker.company.companyName(),
             email: faker.internet.email(),
             role: 'Admin'
         },
         {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
             username: faker.company.companyName(),
             email: faker.internet.email(),
             role: 'Admin'
         },
         {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
             username: faker.company.companyName(),
             email: faker.internet.email(),
             role: 'Employee'
         },
         {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
             username: faker.company.companyName(),
             email: faker.internet.email(),
             role: 'Employee'
@@ -147,7 +159,7 @@ const seedDb = async () => {
     // Use limit() and skip() for pagination
     const blogs = await Blog.find({}).sort({ description: -1 }).limit(3).skip(1);
 
-    console.log(blogs);
+    // console.log(blogs);
 
     // How to add like
     // const updatedBlog = await Blog.findByIdAndUpdate(

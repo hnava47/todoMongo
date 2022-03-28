@@ -4,6 +4,8 @@ const { isEmail } = require('validator');
 // The Schema is very similar to the "class" that we were creating in Sequelize
 const userSchema = new Schema({
     // username: String
+    firstName: String,
+    lastName: String,
     username: {
         type: String,
         trim: true,
@@ -54,6 +56,14 @@ const userSchema = new Schema({
             trim: true
         }
     }
+}, {
+    toJSON: {
+        virtuals: true
+    }
+});
+
+userSchema.virtual('fullName').get(function() {
+    return `${this.firstName} ${this.lastName}`;
 });
 
 // Model methods
